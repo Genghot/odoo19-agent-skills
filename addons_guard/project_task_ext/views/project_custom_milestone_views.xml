@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_project_custom_milestone_form" model="ir.ui.view">
+        <field name="name">project.custom.milestone.form</field>
+        <field name="model">project.custom.milestone</field>
+        <field name="arch" type="xml">
+            <form string="Milestone">
+                <header>
+                    <button name="action_start" string="Start"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_done" string="Done"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Cancel"
+                            type="object"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <button name="action_reset_draft" string="Reset to Draft"
+                            type="object"
+                            invisible="state not in ('cancelled', 'done')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,in_progress,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="project_id"/>
+                            <field name="responsible_id"/>
+                        </group>
+                        <group>
+                            <field name="deadline"/>
+                            <field name="state"/>
+                            <field name="progress" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View (using <list> not <tree>) -->
+    <record id="view_project_custom_milestone_list" model="ir.ui.view">
+        <field name="name">project.custom.milestone.list</field>
+        <field name="model">project.custom.milestone</field>
+        <field name="arch" type="xml">
+            <list string="Milestones">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="responsible_id"/>
+                <field name="deadline"/>
+                <field name="state"/>
+                <field name="progress" widget="progressbar"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_project_custom_milestone" model="ir.actions.act_window">
+        <field name="name">Milestones</field>
+        <field name="res_model">project.custom.milestone</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first project milestone
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_project_custom_milestone"
+              name="Milestones"
+              parent="project.menu_main_pm"
+              action="action_project_custom_milestone"
+              sequence="30"/>
+
+</odoo>

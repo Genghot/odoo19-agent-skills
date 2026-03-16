@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Partner Form View -->
+    <record id="view_partner_form_loyalty" model="ir.ui.view">
+        <field name="name">res.partner.form.loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add loyalty_level after email -->
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="loyalty_level"
+                       readonly="loyalty_level == 'platinum'"/>
+            </xpath>
+            <!-- Add loyalty_points after loyalty_level -->
+            <xpath expr="//field[@name='loyalty_level']" position="after">
+                <field name="loyalty_points"
+                       readonly="loyalty_level == 'platinum'"/>
+            </xpath>
+            <!-- Add Loyalty Info notebook page -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Loyalty Info" name="loyalty_info">
+                    <group>
+                        <group>
+                            <field name="loyalty_level"
+                                   readonly="loyalty_level == 'platinum'"/>
+                            <field name="loyalty_points"
+                                   readonly="loyalty_level == 'platinum'"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Partner List View (using _tree suffix, NOT _list) -->
+    <record id="view_partner_list_loyalty" model="ir.ui.view">
+        <field name="name">res.partner.list.loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="loyalty_level" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

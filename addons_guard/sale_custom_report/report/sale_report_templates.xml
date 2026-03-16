@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Sale Order Report Document -->
+    <template id="report_saleorder_document_inherit_terms"
+              inherit_id="sale.report_saleorder_document">
+
+        <!-- Add Terms and Conditions section after the total summary -->
+        <xpath expr="//div[@name='so_total_summary']" position="after">
+            <div class="mt-4" name="terms_and_conditions">
+                <h4>Terms and Conditions</h4>
+
+                <!-- Show sale order note if present -->
+                <t t-if="doc.note">
+                    <div class="mb-3">
+                        <strong>Notes:</strong>
+                        <p t-esc="doc.note"/>
+                    </div>
+                </t>
+
+                <!-- Payment term details table -->
+                <t t-if="doc.payment_term_id">
+                    <div class="mb-3">
+                        <strong>Payment Terms:</strong>
+                        <table class="table table-sm table-bordered mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Payment Term</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td t-esc="doc.payment_term_id.name"/>
+                                    <td>
+                                        <t t-if="doc.payment_term_id.note">
+                                            <span t-esc="doc.payment_term_id.note"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <t t-if="doc.payment_term_id.line_ids">
+                                    <tr>
+                                        <th colspan="2">Payment Schedule</th>
+                                    </tr>
+                                    <tr t-foreach="doc.payment_term_id.line_ids" t-as="pt_line">
+                                        <td>
+                                            <span t-if="pt_line.delay_type == 'days_after'"
+                                                  t-esc="'%s days after invoice date' % pt_line.nb_days"/>
+                                            <span t-elif="pt_line.delay_type == 'days_after_end_of_month'"
+                                                  t-esc="'%s days after end of month' % pt_line.nb_days"/>
+                                            <span t-elif="pt_line.delay_type == 'days_after_end_of_next_month'"
+                                                  t-esc="'%s days after end of next month' % pt_line.nb_days"/>
+                                            <span t-else="" t-esc="pt_line.delay_type"/>
+                                        </td>
+                                        <td>
+                                            <span t-if="pt_line.value == 'percent'"
+                                                  t-esc="'%s%%' % pt_line.value_amount"/>
+                                            <span t-elif="pt_line.value == 'fixed'"
+                                                  t-esc="'Fixed: %s' % pt_line.value_amount"/>
+                                            <span t-else="">Balance</span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>

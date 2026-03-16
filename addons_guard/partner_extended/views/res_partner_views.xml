@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_loyalty" model="ir.ui.view">
+        <field name="name">res.partner.form.loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//group" position="after">
+                <group string="Loyalty Information">
+                    <group>
+                        <field name="loyalty_level"/>
+                        <field name="loyalty_points"/>
+                    </group>
+                    <group>
+                        <field name="loyalty_display"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_loyalty" model="ir.ui.view">
+        <field name="name">res.partner.list.loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="loyalty_level" optional="show"/>
+                <field name="loyalty_points" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

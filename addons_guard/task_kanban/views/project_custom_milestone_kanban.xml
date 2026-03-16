@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Kanban View -->
+    <record id="view_project_custom_milestone_kanban" model="ir.ui.view">
+        <field name="name">project.custom.milestone.kanban</field>
+        <field name="model">project.custom.milestone</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <templates>
+                    <t t-name="card">
+                        <field name="name" class="fw-bold fs-5"/>
+                        <field name="deadline"/>
+                        <field name="responsible_id" widget="many2one_avatar_user"/>
+                        <field name="progress" widget="progressbar"/>
+                        <footer>
+                            <field name="state" widget="label_selection"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Extend the action to include kanban -->
+    <record id="project_task_ext.action_project_custom_milestone" model="ir.actions.act_window">
+        <field name="view_mode">list,kanban,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Sale Order Form View -->
+    <record id="view_order_form_inherit_priority" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.priority</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="priority"/>
+                <field name="priority_note"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Sale Order List View (uses _tree suffix per guardrail) -->
+    <record id="view_order_tree_inherit_priority" model="ir.ui.view">
+        <field name="name">sale.order.list.inherit.priority</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-danger">priority == 'critical'</attribute>
+                <attribute name="decoration-warning">priority == 'urgent'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="priority" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Quotation List View -->
+    <record id="view_quotation_tree_inherit_priority" model="ir.ui.view">
+        <field name="name">sale.order.quotation.list.inherit.priority</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-danger">priority == 'critical'</attribute>
+                <attribute name="decoration-warning">priority == 'urgent'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="priority" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

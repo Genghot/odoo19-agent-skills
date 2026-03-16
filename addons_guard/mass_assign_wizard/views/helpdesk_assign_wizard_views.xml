@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_helpdesk_assign_wizard_form" model="ir.ui.view">
+        <field name="name">helpdesk.assign.wizard.form</field>
+        <field name="model">helpdesk.assign.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Mass Assign Tickets">
+                <group>
+                    <field name="user_id"/>
+                    <field name="ticket_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="action_assign" string="Assign" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Server action to open the wizard from list view -->
+    <record id="action_helpdesk_mass_assign" model="ir.actions.act_window">
+        <field name="name">Mass Assign</field>
+        <field name="res_model">helpdesk.assign.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="helpdesk_lite.model_helpdesk_ticket"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+</odoo>

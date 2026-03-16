@@ -1,0 +1,6 @@
+#[submodule ".skills/odoo19-agent-skills"]
+#	path = .skills/odoo19-agent-skills
+#	url = https://github.com/Genghot/odoo19-agent-skills.git
+[submodule "enterprise"]
+	path = enterprise
+	url = https://github.com/Genghot/odoo_enterprise_19.git

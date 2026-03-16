@@ -1,0 +1,20 @@
+# Guard Install Results — 2026-03-16
+# Clean DB: test_guard_clean, Docker Odoo 19.0 CE
+
+PASS|equipment_tracking
+PASS|partner_extended
+PASS|helpdesk_lite
+PASS|mass_assign_wizard
+PASS|api_endpoint
+PASS|partner_view_ext
+PASS|ticket_search
+PASS|equipment_settings
+PASS|sale_priority
+PASS|sale_confirm_check
+PASS|sale_line_ref
+PASS|sale_pricelist_note
+PASS|sale_custom_report
+PASS|project_task_ext
+PASS|task_kanban
+
+Pass: 15 / 15
