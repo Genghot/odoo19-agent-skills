@@ -19,6 +19,7 @@ class ProjectCustomMilestone(models.Model):
     description = fields.Html(string='Description')
     progress = fields.Float(string='Progress (%)')
 
+    @api.depends('name')
     def _compute_display_name(self):
         for record in self:
             record.display_name = record.name or ''

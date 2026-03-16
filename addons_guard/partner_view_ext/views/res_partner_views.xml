@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- Inherit Partner Form View -->
-    <record id="view_partner_form_loyalty" model="ir.ui.view">
+    <record id="view_partner_form_loyalty_ext" model="ir.ui.view">
         <field name="name">res.partner.form.loyalty</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
