@@ -1,7 +1,7 @@
 ## 1. Project Setup
 
 - [x] 1.1 Create directory structure: `odoo-v19-core/`, `odoo-v19-core/references/`, `odoo-v19-views/`, `odoo-v19-views/references/`, `odoo-v19-sale/`, `odoo-v19-sale/references/`
-- [ ] 1.2 Initialize git repo, create `.gitignore`, and push to GitHub at `kenghot-king/odoo19-agent-skills`
+- [x] 1.2 Initialize git repo, create `.gitignore`, and push to GitHub at `Genghot/odoo19-agent-skills`
 
 ## 2. Build odoo-v19-core Skill
 
