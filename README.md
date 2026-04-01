@@ -35,6 +35,47 @@ ln -s ../../.skills/odoo19-agent-skills/odoo-v19-sale-guard .claude/skills/
 
 Copy the `SKILL.md` file from any skill directory into your agent's skill folder.
 
+## Initialize a New Odoo 19 Project
+
+Once skills are installed, ask your agent to scaffold the project:
+
+```
+> Create a new Odoo 19 project for my custom module
+```
+
+The agent generates a ready-to-run project:
+
+```
+my-odoo-project/
+├── docker-compose.yml    # Odoo 19.0 + PostgreSQL 16
+├── config/
+│   └── odoo.conf         # Pre-configured addons path
+├── addons/
+│   └── .gitkeep          # Your custom modules go here
+└── .gitignore
+```
+
+Then start developing:
+
+```bash
+# 1. Start the environment
+docker compose up -d
+
+# 2. Open Odoo
+open http://localhost:8069
+
+# 3. Create a database from the database manager
+
+# 4. Ask the agent to create your module
+#    The guardrail skills automatically prevent v19 pitfalls
+> Create a custom module called inventory_barcode in the addons folder
+
+# 5. Restart Odoo and update apps list
+docker compose restart odoo
+```
+
+The guardrail skills (`core-guard`, `views-guard`, `sale-guard`) activate automatically during module development, preventing known Odoo 19 breaking changes as the agent writes code.
+
 ## What the Guardrails Prevent
 
 Tested against 15 prompts on Odoo 19.0 CE with Docker:
